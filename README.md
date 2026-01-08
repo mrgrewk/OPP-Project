@@ -1,8 +1,7 @@
 # Object-Oriented Programming | Autonomous Driving Simulation
 
 **Course:** Αντικειμενοστραφής Προγραμματισμός  
-**Semester:** Χειμερινό εξάμηνο ακαδ. έτους 2025–2026  
-**Language:** C++ (C++17)  
+**Language:** C++
 **Executable:** `oopproj_2025`
 
 This repository contains a simplified simulation of a **fully autonomous self-driving car** navigating a 2D grid world using **GPS targets**, **sensor perception**, and **sensor fusion**.  
