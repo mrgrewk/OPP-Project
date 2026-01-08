@@ -2,7 +2,7 @@
 
 **Name:** Panagiotis Christoforidis (Παναγιώτης Χριστοφορίδης)
 
-**sdi:** sdi2400246
+**sdi:** sdi2400246 (R/N: 1115202400246)
 
 **Repository:** [mrgrewk/OPP-Project](https://github.com/mrgrewk/OPP-Project)
 
