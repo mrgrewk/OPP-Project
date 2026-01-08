@@ -1,8 +1,10 @@
 # Object-Oriented Programming | Autonomous Driving Simulation
 
-**Course:** Αντικειμενοστραφής Προγραμματισμός  
-**Language:** C++
-**Executable:** `oopproj_2025`
+**Name:** Panagiotis Christoforidis (Παναγιώτης Χριστοφορίδης)
+
+**sdi:** sdi2400246
+
+**Repository:** [mrgrewk/OPP-Project](https://github.com/mrgrewk/OPP-Project)
 
 This repository contains a simplified simulation of a **fully autonomous self-driving car** navigating a 2D grid world using **GPS targets**, **sensor perception**, and **sensor fusion**.  
 The project is designed to demonstrate core **Object-Oriented Programming (OOP)** principles in practice.
