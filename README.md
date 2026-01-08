@@ -12,8 +12,6 @@ The project is designed to demonstrate core **Object-Oriented Programming (OOP)*
 > **When I wrote this simulation, I thought I understood autonomous driving.**  
 > **Now… the car understands more than I do.**
 
----
-
 ## Project Overview
 
 The simulation models a **GridWorld** populated with static and moving objects.  
@@ -25,8 +23,6 @@ Key concepts demonstrated:
 - Polymorphism
 - Composition
 - Object communication (messaging)
-
----
 
 ## Main Components
 
@@ -56,8 +52,6 @@ The car:
 3. Makes navigation decisions  
 4. Executes movement  
 
----
-
 ### 3. **Sensors**
 Each sensor has different capabilities, range, and accuracy.
 
@@ -68,8 +62,6 @@ Implemented sensor types:
 
 Each sensor produces `SensorReading` objects with a confidence score.
 
----
-
 ### 4. **Sensor Fusion Engine**
 Combines multiple sensor readings into a single, unified perception.
 
@@ -78,8 +70,6 @@ Key ideas:
 - Use confidence-weighted averaging
 - Apply minimum confidence threshold
 - Special safety handling for bicycles
-
----
 
 ### 5. **World Objects**
 
@@ -96,8 +86,6 @@ Each object has:
 - Unique ID
 - Position
 - Glyph for visualization
-
----
 
 ## Visualization
 
@@ -126,8 +114,6 @@ Two visualization modes are supported:
 | Green light | `G` |
 | Parked car | `P` |
 | Unknown | `?` |
-
----
 
 ## Build Instructions
 
