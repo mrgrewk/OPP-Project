@@ -155,7 +155,7 @@ The simulation is fully configurable via command-line arguments.
 | `--dimY <int>` | World height | 40 |
 | `--numMovingCars <int>` | Number of moving cars | 3 |
 | `--numMovingBikes <int>` | Number of moving bikes | 4 |
-| `--numParkedCars <int>` | Number of
+| `--numParkedCars <int>` | Number of parked cars | 5 |
 
 ## Simulation Termination
 The simulation ends when:
