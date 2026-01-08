@@ -165,6 +165,47 @@ The simulation ends when:
 - The car moves outside world bounds, or
 - All GPS targets are successfully reached
 
+## Methodology
+- **Key classes & primary fields**
+	- `GridWorld`: dimensions, list of `WorldObject` pointers, tick counter
+	- `WorldObject` / `StaticObject` / `MovingObject`: `id`, `position` (`x,y`), `glyph`, behavior methods
+	- `SelfDrivingCar`: `position`, `heading`, `speedState` (`STOPPED`/`HALF_SPEED`/`FULL_SPEED`), GPS target queue, sensors
+	- `SensorReading`: `objectId`, measured `position`, optional `speed`/`heading`, `confidence`
+	- `SensorFusionEngine`: accepts `SensorReading`s and outputs fused object estimates
+
+- **Assumptions**
+	- Simulation advances in discrete ticks; the user advances each tick by pressing ENTER.
+	- The car begins at `(0,0)` and GPS targets are provided as pairs via `--gps x y [x y ...]`.
+	- Objects cannot occupy the same exact grid cell when spawned (placement attempts are retried).
+	- Moving-object collision handling is simplified: objects avoid overlapping positions; the self-driving car prioritizes safety.
+
+- **Sensor models (high level)**
+	- `Lidar`: 360° coverage, high distance accuracy; returns positions with small Gaussian noise.
+	- `Radar`: detects moving objects and reports relative speed and heading with moderate accuracy.
+	- `Camera`: identifies object types and traffic light states (color) with variable confidence; reads stop sign text.
+	- Each sensor returns a `confidence` in [0,1]; lower confidence increases measurement variance.
+
+- **Sensor fusion algorithm**
+	1. Group incoming `SensorReading`s by `objectId`.
+	2. Discard readings below a minimum confidence threshold (default ~0.25).
+	3. Compute confidence-weighted averages for position (separately for `x` and `y`):
+
+		 $$x_f = \frac{\sum_i c_i x_i}{\sum_i c_i},\quad y_f = \frac{\sum_i c_i y_i}{\sum_i c_i}$$
+
+		 where $c_i$ is the confidence of reading $i$.
+	4. For velocity or categorical attributes (e.g., light color), use highest-confidence reading or majority weighted by confidence.
+	5. Apply safety heuristics (e.g., give extra distance buffer for bicycles).
+
+- **Navigation & control**
+	- GPS targets are stored in a queue; the current target is the head of the queue.
+	- The car computes a simple heading toward the target and chooses turn/forward actions to reduce Manhattan distance while obeying speed/state transitions.
+	- Speed transitions follow simple rules: accelerate toward `FULL_SPEED` when the path is clear, decelerate or stop for red lights, stop signs, or nearby obstacles.
+	- Traffic lights and stop signs are obeyed using sensor-fused estimates and confidence thresholds.
+
+- **World setup & randomness**
+	- Objects are placed randomly using a RNG seeded by `--seed` for reproducibility.
+	- Default entity counts are used unless overridden by flags.
+
 ## Notes
 - Object placement is randomized but reproducible with `--seed`
 - The car always starts at `(0,0)`
